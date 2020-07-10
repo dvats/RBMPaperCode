@@ -93,8 +93,8 @@ make_plots <- function(A, B, rho, m, n, rep, plot_step = 50) {
         segments(x0 = x, y0 = colMeans(plot_mat_abm[, ind]) - 1.96 * se_abm, x1 = x, y1 = colMeans(plot_mat_abm[, ind]) + 1.96 * se_abm, col = alpha("green", 0.8))
 
         lines(x, colMeans(plot_mat_nm[, ind]), type = "l", col = "red", lty = 2, lwd = 2)
-        se_sm = sqrt(apply(plot_mat_nm[, ind], 2, var) / dim(plot_mat_nm)[1])
-        segments(x0 = x, y0 = colMeans(plot_mat_nm[, ind]) - 1.96 * se_sm, x1 = x, y1 = colMeans(plot_mat_nm[, ind]) + 1.96 * se_sm, col = alpha("red", 0.3))
+        se_nm = sqrt(apply(plot_mat_nm[, ind], 2, var) / dim(plot_mat_nm)[1])
+        segments(x0 = x, y0 = colMeans(plot_mat_nm[, ind]) - 1.96 * se_nm, x1 = x, y1 = colMeans(plot_mat_nm[, ind]) + 1.96 * se_nm, col = alpha("red", 0.3))
 
         lines(x, colMeans(plot_mat_rbm[, ind]), type = "l", col = "blue", lty = 6, lwd = 2)
         se_rbm = sqrt(apply(plot_mat_rbm[, ind], 2, var) / dim(plot_mat_rbm)[1])
@@ -161,7 +161,7 @@ make_plots <- function(A, B, rho, m, n, rep, plot_step = 50, type) {
         coverage_data <- data.frame(
                             range = checkpoints,
                             coverage_ABM = sapply(1:length(checkpoints), function(i) mean(coverage[((i - 1) * rep + 1):(i * rep), 1])),
-                            coverage_SM = sapply(1:length(checkpoints), function(i) mean(coverage[((i - 1) * rep + 1):(i * rep), 2])),
+                            coverage_NM = sapply(1:length(checkpoints), function(i) mean(coverage[((i - 1) * rep + 1):(i * rep), 2])),
                             coverage_RBM = sapply(1:length(checkpoints), function(i) mean(coverage[((i - 1) * rep + 1):(i * rep), 3])),
                             coverage_TRUE = sapply(1:length(checkpoints), function(i) mean(coverage[((i - 1) * rep + 1):(i * rep), 4]))
                         )

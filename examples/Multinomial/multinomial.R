@@ -67,7 +67,7 @@ running_multinomial <- function(rep, m, n, plot_step) {
             rbm <- RBM(X[, 1:(starting_buffer + plot_step * i),], m, starting_buffer + plot_step * i, r, c, b)
 
             plot_mat_abm[j, i + 1] = (ESS(X[, 1:(starting_buffer + plot_step * i),], abm))[2]
-            #plot_mat_nm[j, ((i - 1) * 5 + 1):(i * 5)] = c(sm[1, 1], sm[2, 2], sm[1, 2], det(sm), norm(sm, type = "F"))
+            #plot_mat_nm[j, ((i - 1) * 5 + 1):(i * 5)] = c(nm[1, 1], nm[2, 2], nm[1, 2], det(nm), norm(nm, type = "F"))
             plot_mat_rbm[j, i + 1] = (ESS(X[, 1:(starting_buffer + plot_step * i),], rbm))[2]
         }
 
