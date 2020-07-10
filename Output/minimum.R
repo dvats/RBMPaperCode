@@ -87,14 +87,14 @@ make_plots <- function(A, B, rho, m, n, rep, plot_step = 50) {
         plot_name <- paste("MVG_running", "rho", rho, "m", m, "n", n, "type", k, ".pdf", sep = "_")
         pdf(paste(plot_name, sep = "/"), height = 6, width = 6)
 
-        yrange = range(colMeans(plot_mat_sm[, ind]), colMeans(plot_mat_abm[, ind]), colMeans(plot_mat_rbm[, ind]))
+        yrange = range(colMeans(plot_mat_nm[, ind]), colMeans(plot_mat_abm[, ind]), colMeans(plot_mat_rbm[, ind]))
         plot(x, colMeans(plot_mat_abm[, ind]), type = "l", col = "green", lty = 1, lwd = 2, ylim = c(yrange[1]/1.15, 1.05*yrange[2]), ylab = names[k], xlab = "Chain Length", cex.lab = 1.4, cex.axis = 1.4)
         se_abm = sqrt(apply(plot_mat_abm[, ind], 2, var) / dim(plot_mat_abm)[1])
         segments(x0 = x, y0 = colMeans(plot_mat_abm[, ind]) - 1.96 * se_abm, x1 = x, y1 = colMeans(plot_mat_abm[, ind]) + 1.96 * se_abm, col = alpha("green", 0.8))
 
-        lines(x, colMeans(plot_mat_sm[, ind]), type = "l", col = "red", lty = 2, lwd = 2)
-        se_sm = sqrt(apply(plot_mat_sm[, ind], 2, var) / dim(plot_mat_sm)[1])
-        segments(x0 = x, y0 = colMeans(plot_mat_sm[, ind]) - 1.96 * se_sm, x1 = x, y1 = colMeans(plot_mat_sm[, ind]) + 1.96 * se_sm, col = alpha("red", 0.3))
+        lines(x, colMeans(plot_mat_nm[, ind]), type = "l", col = "red", lty = 2, lwd = 2)
+        se_sm = sqrt(apply(plot_mat_nm[, ind], 2, var) / dim(plot_mat_nm)[1])
+        segments(x0 = x, y0 = colMeans(plot_mat_nm[, ind]) - 1.96 * se_sm, x1 = x, y1 = colMeans(plot_mat_nm[, ind]) + 1.96 * se_sm, col = alpha("red", 0.3))
 
         lines(x, colMeans(plot_mat_rbm[, ind]), type = "l", col = "blue", lty = 6, lwd = 2)
         se_rbm = sqrt(apply(plot_mat_rbm[, ind], 2, var) / dim(plot_mat_rbm)[1])
@@ -171,48 +171,9 @@ make_plots <- function(A, B, rho, m, n, rep, plot_step = 50, type) {
         grid.table(coverage_data)
         dev.off()
 
-        #determinant = determinant ^ (1 / p)
-        #determinant_data <- data.frame(
-                           #range = checkpoints,
-                           #determinant_ABM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 1])),
-                           #determinant_SM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 2])),
-                           #determinant_RBM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 3])),
-                           #determinant_TRUE = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 4]))
-    #)
-        #foo <- paste("MVG_determinant", "rho", rho, "n", n, "m", m, ".pdf", sep = "_")
-        #foo <- paste(foo)
-        #pdf(foo, height = 11, width = 10)
-        #grid.table(determinant_data)
-        #dev.off()
     }
 
-    ## density plots
-    #if (type == 'CDE') {
-        #expected <- matrix(0, nrow = 2, ncol = 2)
-        #expected[1, 1] = A * ((A * B + rho ^ 2) / (A * B - rho ^ 2))
-        #expected[1, 2] = (2 * rho * A * B) / (A * B - rho ^ 2)
-        #expected[2, 1] = (2 * rho * A * B) / (A * B - rho ^ 2)
-        #expected[2, 2] = B * ((A * B + rho ^ 2) / (A * B - rho ^ 2))
 
-        #truths <- c(expected[1, 1], expected[2, 2], expected[1, 2], det(expected), norm(expected, "F"))
-        #names <- c("Var1", "Var2", "Covariance", "Determinant", "Frobenius Norm")
-        #for (k in 1:1) {
-
-            #for (i in 1:length(checkpoints)) {
-                #ind <- checkpoints[i]
-                #plot_name <- paste("MVG_CDE", "range", ind, "rho", rho, "m", m, "n", ind, "type", k, ".pdf", sep = "_")
-                #pdf(paste(plot_name, sep = "/"), height = 6, width = 6)
-                #plot(density(pluck(SM_estimate[((i - 1) * rep + 1):(i * rep),,], k)), type = "l", col = "red", lty = 2, lwd = 1, main = " ",
-                #ylab = names[k], xlab = paste('chain length = ', ind), ylim = range(density(pluck(ABM_estimate[((i - 1) * rep + 1):(i * rep),,], k))$y), cex.axis = 1.4, cex.lab = 1.4)
-                #lines(density(pluck(ABM_estimate[((i - 1) * rep + 1):(i * rep),,], k)), type = "l", col = "green", lty = 1, lwd = 1)
-                #lines(density(pluck(RBM_estimate[((i - 1) * rep + 1):(i * rep),,], k)), type = "l", col = "blue", lty = 6, lwd = 1)
-                #abline(v = truths[k], lty = 2)
-                #op <- par(cex = 1.2)
-                #legend("topright", legend = c("ABM", "Naive", "RBM"), col = c("green", "red", "blue"), lty = c(1, 2, 6), bty = 'n')
-                #dev.off()
-            #}
-        #}
-    #}
 }
 
 
@@ -357,48 +318,6 @@ for (iter1 in 1:length(m_)) {
     
 }
 
-## PLOT FUNCTION FOR RUNNING PLOTS
-#make_plots <- function(m, n, rep, plot_step = 500) {
-
-    #filename = paste("rosenbrock_running", edge1, edge2, "m", m, "n", n, ".Rdata", sep = "_")
-    #load(filename)
-
-    #names <- c("Var1", "Var2", "Covariance", "Determinant", "Frobenius Norm")
-    #for (k in 1:1) {
-        #ind <- (0:(floor(n / plot_step) - 1)) * 5 + k
-        #x <- (0:(floor(n / plot_step) - 1)) * plot_step + plot_step
-        #plot_name <- paste("rosenbrock_running", edge1, edge2, "m", m, "n", n, "type", k, ".pdf", sep = "_")
-        #pdf(plot_name, height = 6, width = 6)
-
-        #plot(x, colMeans(plot_mat_abm[, ind]), type = "l", col = "green", lwd = 1, ylim = range(colMeans(plot_mat_abm[, ind]), colMeans(plot_mat_rbm[, ind])), ylab = names[k], xlab = "Chain Length")
-        #se_abm = sqrt(apply(plot_mat_abm[, ind], 2, var) / dim(plot_mat_abm)[1])
-        #segments(x0 = x, y0 = colMeans(plot_mat_abm[, ind]) - 1.96 * se_abm, x1 = x, y1 = colMeans(plot_mat_abm[, ind]) + 1.96 * se_abm, col = "green")
-
-
-        #lines(x, colMeans(plot_mat_rbm[, ind]), type = "l", col = "blue", lwd = 1)
-        #se_rbm = sqrt(apply(plot_mat_rbm[, ind], 2, var) / dim(plot_mat_rbm)[1])
-        #segments(x0 = x, y0 = colMeans(plot_mat_rbm[, ind]) - 1.96 * se_rbm, x1 = x, y1 = colMeans(plot_mat_rbm[, ind]) + 1.96 * se_rbm, col = "blue")
-
-        #op <- par(cex = 1.2)
-        #legend("bottomright", legend = c("ABM", "RBM"), col = c("green", "blue"), lty = c(1, 6), bty = 'n')
-        #dev.off()
-    #}
-#}
-
-#edge1 = 8
-#edge2 = 8
-#rep <- 1e2 
-#m_ <- c(5, 10)
-#n <- 1e5
-
-#plot_step <- 500
-
-#for (iter1 in 1:length(m_)) {
-
-    #m <- m_[iter1]
-    #make_plots(m, n, rep, plot_step)
-
-#}
 
 ## MAKE TABLES
 make_plots <- function(rep, m, n) {
@@ -418,19 +337,7 @@ make_plots <- function(rep, m, n) {
     grid.table(coverage_data)
     dev.off()
 
-    #determinant = rbind(determinant[1:(2 * rep),], determinant[(3 * rep + 1):(4 * rep),], determinant[(5 * rep + 1):(6 * rep),])
-    #determinant = determinant ^ (1 / p)
-    #determinant_data <- data.frame(
-    #range = checkpoints,
-    #determinant_ABM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 1])),
-    ##determinant_SM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 2])),
-    #determinant_RBM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 3]))
-    #)
-    #foo <- paste("rosenbrock_determinant", "n", n, "m", m, ".pdf", sep = "_")
-    #foo <- paste(foo)
-    #pdf(foo, height = 11, width = 10)
-    #grid.table(determinant_data)
-    #dev.off()
+
 }
 
 edge1 = 8
@@ -533,36 +440,5 @@ n <- 1e4
 plot_step <- 100
 
 make_plots(m, n, rep, plot_step)
-
-## DETERMINANT^1/p CODE FOR MULTINOMIAL
-#make_plots <- function(rep, m, n, p, checkpoints) {
-
-    #filename = paste("multinomial_CDE_sqroot_2", "m", m, "n", n, ".Rdata", sep = "_")
-    #load(filename)
-
-    ## Tables:
-    #determinant = determinant^(1/p)
-    #determinant_data <- data.frame(
-    #range = checkpoints,
-    #determinant_ABM = sapply(1:length(checkpoints), function(i) mean( determinant[((i - 1) * rep + 1):(i * rep), 1] )),
-    ##determinant_SM = sapply(1:length(checkpoints), function(i) mean(determinant[((i - 1) * rep + 1):(i * rep), 2])),
-    #determinant_RBM = sapply(1:length(checkpoints), function(i) mean( determinant[((i - 1) * rep + 1):(i * rep), 3]))
-    #)
-    #foo <- paste("multinomial_determinant", "n", n, "m", m, ".pdf", sep = "_")
-    #foo <- paste(foo)
-    #pdf(foo, height = 11, width = 10)
-    #grid.table(determinant_data)
-    #dev.off()
-
-#}
-
-#rep <- 1e3 # change to 1e3. Just running a prep one right now
-#m <- 2
-#n <- 1e4
-#p <- 22
-#checkpoints <- c(1e3, 3e3, 5e3, 7e3, n)
-#make_plots(rep, m, n, p, checkpoints)
-
-
 
 

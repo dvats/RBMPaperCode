@@ -63,11 +63,11 @@ running_multinomial <- function(rep, m, n, plot_step) {
         for (i in (0:floor((n - starting_buffer) / plot_step))) {
             b <- chooseBatch(X[, 1:(starting_buffer + plot_step * i),], r, 'sqroot')
             abm <- ABM(X[, 1:(starting_buffer + plot_step * i),], m, starting_buffer + plot_step * i, r, b)
-            #sm <- SM(X[, (starting_buffer + 1):(starting_buffer + plot_step * i),], m, plot_step * i)
+            #nm <- NM(X[, (starting_buffer + 1):(starting_buffer + plot_step * i),], m, plot_step * i)
             rbm <- RBM(X[, 1:(starting_buffer + plot_step * i),], m, starting_buffer + plot_step * i, r, c, b)
 
             plot_mat_abm[j, i + 1] = (ESS(X[, 1:(starting_buffer + plot_step * i),], abm))[2]
-            #plot_mat_sm[j, ((i - 1) * 5 + 1):(i * 5)] = c(sm[1, 1], sm[2, 2], sm[1, 2], det(sm), norm(sm, type = "F"))
+            #plot_mat_nm[j, ((i - 1) * 5 + 1):(i * 5)] = c(sm[1, 1], sm[2, 2], sm[1, 2], det(sm), norm(sm, type = "F"))
             plot_mat_rbm[j, i + 1] = (ESS(X[, 1:(starting_buffer + plot_step * i),], rbm))[2]
         }
 

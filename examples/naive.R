@@ -1,4 +1,4 @@
-#' stupid method
+#' naive method
 #'
 #' @param Y Batched input data
 #' @param m number of replications
@@ -6,7 +6,7 @@
 #' @param a number of batches in each replication
 #' @param b batch size
 #'
-#' @return Variance estimate using the stupid method
+#' @return Variance estimate using the naive method
 
 NM <- function(X, m, n) {
     a <- floor(sqrt(n))
