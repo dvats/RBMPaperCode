@@ -1,12 +1,12 @@
 ###########################################################
-## Aim : Checking running estimates of ABM, stupid method 
+## Aim : Checking running estimates of ABM, naive method 
 ##       and variance estimator
 ##########################################################
 
 set.seed(1)
 source("./../get_batch.R")
 source("./../ABM.R")
-source("./../stupid.R")
+source("./../naive.R")
 source("./../RBM.R")
 source("./../ESS.R")
 source("./../choosingbatch.R")
@@ -22,7 +22,7 @@ running_multinomial <- function(rep, m, n, plot_step) {
     starting_buffer <- 500
 
     plot_mat_abm <- matrix(, nrow = rep, ncol = 1 + floor((n - starting_buffer) / plot_step))
-    #plot_mat_sm <- matrix(, nrow = rep, ncol = floor((n - starting_buffer) / plot_step))
+    #plot_mat_nm <- matrix(, nrow = rep, ncol = floor((n - starting_buffer) / plot_step))
     plot_mat_rbm <- matrix(, nrow = rep, ncol = 1 + floor((n - starting_buffer) / plot_step))
 
     print(n + m)

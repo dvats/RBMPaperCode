@@ -1,10 +1,10 @@
 ########################################################################
 ## Aim : Calculate Variance using average batch means, 
-##       replicated batch means and stupid method for 2d Rosenbrock density
+##       replicated batch means and naive method for 2d Rosenbrock density
 ########################################################################
 source("./../get_batch.R")
 source("./../ABM.R")
-source("./../stupid.R")
+source("./../naive.R")
 source("./../RBM.R")
 source("./../choosingBatch.R")
 source("./../ESS.R")

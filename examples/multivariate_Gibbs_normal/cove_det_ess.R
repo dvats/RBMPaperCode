@@ -1,5 +1,5 @@
 ###########################################################
-## Aim : Checking running estimates of ABM, stupid method 
+## Aim : Checking running estimates of ABM, naive method 
 ##       and variance estimator
 ##########################################################
 
@@ -7,7 +7,7 @@ set.seed(10)
 library(mcmcse)
 source("Gibbs_sampler.R")
 source("./../ABM.R")
-source("./../stupid.R")
+source("./../naive.R")
 source("./../RBM.R")
 source("./../get_batch.R")
 source("./../ESS.R")

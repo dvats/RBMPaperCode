@@ -8,7 +8,7 @@
 #'
 #' @return Variance estimate using the stupid method
 
-SM <- function(X, m, n) {
+NM <- function(X, m, n) {
     a <- floor(sqrt(n))
     b <- a
     p <- dim(X)[3]
@@ -16,6 +16,6 @@ SM <- function(X, m, n) {
     for (i in 1:m) {
         Ymean[i,] = colMeans(X[i,,])
     }
-    sm <- n * var(Ymean)
-    return(sm)
+    nm <- n * var(Ymean)
+    return(nm)
 }

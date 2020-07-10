@@ -1,10 +1,10 @@
 ########################################################################
 ## Aim : Calculate Variance using average batch means, 
-##       replicated batch means and stupid method for multinomial
+##       replicated batch means and naive method for multinomial
 ########################################################################
 source("./../get_batch.R")
 source("./../ABM.R")
-source("./../stupid.R")
+source("./../naive.R")
 source("./../RBM.R")
 source("./../ESS.R")
 source("./../choosingbatch.R")
@@ -25,7 +25,7 @@ running_multinomial <- function(rep, m, n, true_mean) {
     ess_mat_avg <- matrix(, nrow = length(checkpoints) * rep, ncol = 3)
 
     ABM_estimate <- array(dim = c(length(checkpoints) * rep, p, p))
-    SM_estimate <- array(dim = c(length(checkpoints) * rep, p, p))
+    NM_estimate <- array(dim = c(length(checkpoints) * rep, p, p))
     RBM_estimate <- array(dim = c(length(checkpoints) * rep, p, p))
 
     for (j in 1:rep) {
@@ -65,21 +65,21 @@ running_multinomial <- function(rep, m, n, true_mean) {
         for (i in 1:length(checkpoints)) {
             b <- chooseBatch(X[, 1:checkpoints[i],], r, 'sqroot')
             ABM_estimate[(i - 1) * rep + j,,] <- ABM(X[, 1:checkpoints[i],], m, checkpoints[i], r, b)
-            SM_estimate[(i - 1) * rep + j,,] <- SM(X[, 1:checkpoints[i],], m, checkpoints[i])
+            NM_estimate[(i - 1) * rep + j,,] <- NM(X[, 1:checkpoints[i],], m, checkpoints[i])
             RBM_estimate[(i - 1) * rep + j,,] <- RBM(X[, 1:checkpoints[i],], m, checkpoints[i], r, c, b)
 
 
             #determinant[(i - 1) * rep + j, 1] = det(ABM_estimate[(i - 1) * rep + j,,])
-            #determinant[(i - 1) * rep + j, 2] = det(SM_estimate[(i - 1) * rep + j,,])
+            #determinant[(i - 1) * rep + j, 2] = det(NM_estimate[(i - 1) * rep + j,,])
             #determinant[(i - 1) * rep + j, 3] = det(RBM_estimate[(i - 1) * rep + j,,])
 
             ess_abm <- ESS(X[, 1:checkpoints[i],], ABM_estimate[(i - 1) * rep + j,,])
             ess_mat_concat[(i - 1) * rep + j, 1] <- ess_abm[1]
             ess_mat_avg[(i - 1) * rep + j, 1] <- ess_abm[2]
 
-            ess_sm <- ESS(X[, 1:checkpoints[i],], SM_estimate[(i - 1) * rep + j,,])
-            ess_mat_concat[(i - 1) * rep + j, 2] <- ess_sm[1]
-            ess_mat_avg[(i - 1) * rep + j, 2] <- ess_sm[2]
+            ess_nm <- ESS(X[, 1:checkpoints[i],], NM_estimate[(i - 1) * rep + j,,])
+            ess_mat_concat[(i - 1) * rep + j, 2] <- ess_nm[1]
+            ess_mat_avg[(i - 1) * rep + j, 2] <- ess_nm[2]
 
             ess_rbm <- ESS(X[, 1:checkpoints[i],], RBM_estimate[(i - 1) * rep + j,,])
             ess_mat_concat[(i - 1) * rep + j, 3] <- ess_rbm[1]
@@ -90,7 +90,7 @@ running_multinomial <- function(rep, m, n, true_mean) {
 
     }
     filename = paste("CDE_sqroot_2", "m", m, "n", n, ".Rdata", sep = "_")
-    save(ABM_estimate, SM_estimate, RBM_estimate, ess_mat_concat, ess_mat_avg, M, file = paste("output_files", filename, sep = "/"))
+    save(ABM_estimate, NM_estimate, RBM_estimate, ess_mat_concat, ess_mat_avg, M, file = paste("output_files", filename, sep = "/"))
 
 }
 
