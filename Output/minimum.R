@@ -1,5 +1,5 @@
 ######################################
-##### MVG
+##### Bivariate Normal Gibbs sampler
 ######################################
 set.seed(1)
 library(gridExtra)
@@ -354,6 +354,8 @@ for (i in 1:length(m_)) {
     m <- m_[i]
     make_plots(rep, m, n)
 }
+
+
 
 
 ######################################
