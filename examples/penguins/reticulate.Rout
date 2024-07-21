@@ -1,0 +1,511 @@
+
+R version 4.1.1 (2021-08-10) -- "Kick Things"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> set.seed(10)
+> library(reticulate)
+> install_miniconda(path = miniconda_path(), update = TRUE, force = FALSE)
+* Downloading 'https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh' ...
+trying URL 'https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh'
+Content type 'application/x-sh' length 44393084 bytes (42.3 MB)
+==================================================
+downloaded 42.3 MB
+
+* Installing Miniconda -- please wait a moment ...
+PREFIX=/Users/glaedr/Library/r-miniconda
+Unpacking payload ...
+  0%|          | 0/34 [00:00<?, ?it/s]Extracting : libffi-3.3-hb1e8313_2.conda:   0%|          | 0/34 [00:00<?, ?it/s]Extracting : libffi-3.3-hb1e8313_2.conda:   3%|▎         | 1/34 [00:00<00:13,  2.52it/s]Extracting : ruamel_yaml-0.15.100-py39h9ed2024_0.conda:   3%|▎         | 1/34 [00:00<00:13,  2.52it/s]Extracting : wheel-0.36.2-pyhd3eb1b0_0.conda:   6%|▌         | 2/34 [00:00<00:12,  2.52it/s]          Extracting : libcxx-10.0.0-1.conda:   9%|▉         | 3/34 [00:00<00:12,  2.52it/s]          Extracting : pip-21.1.3-py39hecd8cb5_0.conda:  12%|█▏        | 4/34 [00:00<00:11,  2.52it/s]Extracting : pip-21.1.3-py39hecd8cb5_0.conda:  15%|█▍        | 5/34 [00:00<00:08,  3.33it/s]Extracting : six-1.16.0-pyhd3eb1b0_0.conda:  15%|█▍        | 5/34 [00:00<00:08,  3.33it/s]  Extracting : pysocks-1.7.1-py39hecd8cb5_0.conda:  18%|█▊        | 6/34 [00:00<00:08,  3.33it/s]Extracting : pyopenssl-20.0.1-pyhd3eb1b0_1.conda:  21%|██        | 7/34 [00:00<00:08,  3.33it/s]Extracting : chardet-4.0.0-py39hecd8cb5_1003.conda:  24%|██▎       | 8/34 [00:00<00:07,  3.33it/s]Extracting : openssl-1.1.1k-h9ed2024_0.conda:  26%|██▋       | 9/34 [00:00<00:07,  3.33it/s]      Extracting : zlib-1.2.11-h1de35cc_3.conda:  29%|██▉       | 10/34 [00:00<00:07,  3.33it/s]  Extracting : brotlipy-0.7.0-py39h9ed2024_1003.conda:  32%|███▏      | 11/34 [00:00<00:06,  3.33it/s]Extracting : certifi-2021.5.30-py39hecd8cb5_0.conda:  35%|███▌      | 12/34 [00:00<00:06,  3.33it/s]Extracting : pycosat-0.6.3-py39h9ed2024_0.conda:  38%|███▊      | 13/34 [00:00<00:06,  3.33it/s]    Extracting : sqlite-3.36.0-hce871da_0.conda:  41%|████      | 14/34 [00:00<00:06,  3.33it/s]    Extracting : requests-2.25.1-pyhd3eb1b0_0.conda:  44%|████▍     | 15/34 [00:00<00:05,  3.33it/s]Extracting : python-3.9.5-h88f2d9e_3.conda:  47%|████▋     | 16/34 [00:01<00:05,  3.33it/s]     Extracting : python-3.9.5-h88f2d9e_3.conda:  50%|█████     | 17/34 [00:01<00:03,  4.35it/s]Extracting : tzdata-2021a-h52ac0ba_0.conda:  50%|█████     | 17/34 [00:01<00:03,  4.35it/s]Extracting : pycparser-2.20-py_2.conda:  53%|█████▎    | 18/34 [00:01<00:03,  4.35it/s]    Extracting : urllib3-1.26.6-pyhd3eb1b0_1.conda:  56%|█████▌    | 19/34 [00:01<00:03,  4.35it/s]Extracting : conda-package-handling-1.7.3-py39h9ed2024_1.conda:  59%|█████▉    | 20/34 [00:01<00:03,  4.35it/s]Extracting : ca-certificates-2021.7.5-hecd8cb5_1.conda:  62%|██████▏   | 21/34 [00:01<00:02,  4.35it/s]        Extracting : setuptools-52.0.0-py39hecd8cb5_0.conda:  65%|██████▍   | 22/34 [00:01<00:02,  4.35it/s]   Extracting : cryptography-3.4.7-py39h2fd3fbb_0.conda:  68%|██████▊   | 23/34 [00:01<00:02,  4.35it/s]Extracting : python.app-3-py39h9ed2024_0.conda:  71%|███████   | 24/34 [00:01<00:02,  4.35it/s]      Extracting : tqdm-4.61.2-pyhd3eb1b0_1.conda:  74%|███████▎  | 25/34 [00:01<00:02,  4.35it/s]   Extracting : cffi-1.14.6-py39h2125817_0.conda:  76%|███████▋  | 26/34 [00:01<00:01,  4.35it/s]Extracting : tk-8.6.10-hb0a8c7a_0.conda:  79%|███████▉  | 27/34 [00:01<00:01,  4.35it/s]      Extracting : ncurses-6.2-h0a44026_1.conda:  82%|████████▏ | 28/34 [00:01<00:01,  4.35it/s]Extracting : xz-5.2.5-h1de35cc_0.conda:  85%|████████▌ | 29/34 [00:01<00:01,  4.35it/s]   Extracting : readline-8.1-h9ed2024_0.conda:  88%|████████▊ | 30/34 [00:01<00:00,  4.35it/s]Extracting : yaml-0.2.5-haf1e3a3_0.conda:  91%|█████████ | 31/34 [00:01<00:00,  4.35it/s]  Extracting : idna-2.10-pyhd3eb1b0_0.tar.bz2:  94%|█████████▍| 32/34 [00:01<00:00,  4.35it/s]Extracting : conda-4.10.3-py39hecd8cb5_0.tar.bz2:  97%|█████████▋| 33/34 [00:01<00:00,  4.35it/s]Extracting : conda-4.10.3-py39hecd8cb5_0.tar.bz2: 100%|██████████| 34/34 [00:01<00:00,  6.13it/s]                                                                                                 Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: /Users/glaedr/Library/r-miniconda
+
+  added / updated specs:
+    - brotlipy==0.7.0=py39h9ed2024_1003
+    - ca-certificates==2021.7.5=hecd8cb5_1
+    - certifi==2021.5.30=py39hecd8cb5_0
+    - cffi==1.14.6=py39h2125817_0
+    - chardet==4.0.0=py39hecd8cb5_1003
+    - conda-package-handling==1.7.3=py39h9ed2024_1
+    - conda==4.10.3=py39hecd8cb5_0
+    - cryptography==3.4.7=py39h2fd3fbb_0
+    - idna==2.10=pyhd3eb1b0_0
+    - libcxx==10.0.0=1
+    - libffi==3.3=hb1e8313_2
+    - ncurses==6.2=h0a44026_1
+    - openssl==1.1.1k=h9ed2024_0
+    - pip==21.1.3=py39hecd8cb5_0
+    - pycosat==0.6.3=py39h9ed2024_0
+    - pycparser==2.20=py_2
+    - pyopenssl==20.0.1=pyhd3eb1b0_1
+    - pysocks==1.7.1=py39hecd8cb5_0
+    - python.app==3=py39h9ed2024_0
+    - python==3.9.5=h88f2d9e_3
+    - readline==8.1=h9ed2024_0
+    - requests==2.25.1=pyhd3eb1b0_0
+    - ruamel_yaml==0.15.100=py39h9ed2024_0
+    - setuptools==52.0.0=py39hecd8cb5_0
+    - six==1.16.0=pyhd3eb1b0_0
+    - sqlite==3.36.0=hce871da_0
+    - tk==8.6.10=hb0a8c7a_0
+    - tqdm==4.61.2=pyhd3eb1b0_1
+    - tzdata==2021a=h52ac0ba_0
+    - urllib3==1.26.6=pyhd3eb1b0_1
+    - wheel==0.36.2=pyhd3eb1b0_0
+    - xz==5.2.5=h1de35cc_0
+    - yaml==0.2.5=haf1e3a3_0
+    - zlib==1.2.11=h1de35cc_3
+
+
+The following NEW packages will be INSTALLED:
+
+  brotlipy           pkgs/main/osx-64::brotlipy-0.7.0-py39h9ed2024_1003
+  ca-certificates    pkgs/main/osx-64::ca-certificates-2021.7.5-hecd8cb5_1
+  certifi            pkgs/main/osx-64::certifi-2021.5.30-py39hecd8cb5_0
+  cffi               pkgs/main/osx-64::cffi-1.14.6-py39h2125817_0
+  chardet            pkgs/main/osx-64::chardet-4.0.0-py39hecd8cb5_1003
+  conda              pkgs/main/osx-64::conda-4.10.3-py39hecd8cb5_0
+  conda-package-han~ pkgs/main/osx-64::conda-package-handling-1.7.3-py39h9ed2024_1
+  cryptography       pkgs/main/osx-64::cryptography-3.4.7-py39h2fd3fbb_0
+  idna               pkgs/main/noarch::idna-2.10-pyhd3eb1b0_0
+  libcxx             pkgs/main/osx-64::libcxx-10.0.0-1
+  libffi             pkgs/main/osx-64::libffi-3.3-hb1e8313_2
+  ncurses            pkgs/main/osx-64::ncurses-6.2-h0a44026_1
+  openssl            pkgs/main/osx-64::openssl-1.1.1k-h9ed2024_0
+  pip                pkgs/main/osx-64::pip-21.1.3-py39hecd8cb5_0
+  pycosat            pkgs/main/osx-64::pycosat-0.6.3-py39h9ed2024_0
+  pycparser          pkgs/main/noarch::pycparser-2.20-py_2
+  pyopenssl          pkgs/main/noarch::pyopenssl-20.0.1-pyhd3eb1b0_1
+  pysocks            pkgs/main/osx-64::pysocks-1.7.1-py39hecd8cb5_0
+  python             pkgs/main/osx-64::python-3.9.5-h88f2d9e_3
+  python.app         pkgs/main/osx-64::python.app-3-py39h9ed2024_0
+  readline           pkgs/main/osx-64::readline-8.1-h9ed2024_0
+  requests           pkgs/main/noarch::requests-2.25.1-pyhd3eb1b0_0
+  ruamel_yaml        pkgs/main/osx-64::ruamel_yaml-0.15.100-py39h9ed2024_0
+  setuptools         pkgs/main/osx-64::setuptools-52.0.0-py39hecd8cb5_0
+  six                pkgs/main/noarch::six-1.16.0-pyhd3eb1b0_0
+  sqlite             pkgs/main/osx-64::sqlite-3.36.0-hce871da_0
+  tk                 pkgs/main/osx-64::tk-8.6.10-hb0a8c7a_0
+  tqdm               pkgs/main/noarch::tqdm-4.61.2-pyhd3eb1b0_1
+  tzdata             pkgs/main/noarch::tzdata-2021a-h52ac0ba_0
+  urllib3            pkgs/main/noarch::urllib3-1.26.6-pyhd3eb1b0_1
+  wheel              pkgs/main/noarch::wheel-0.36.2-pyhd3eb1b0_0
+  xz                 pkgs/main/osx-64::xz-5.2.5-h1de35cc_0
+  yaml               pkgs/main/osx-64::yaml-0.2.5-haf1e3a3_0
+  zlib               pkgs/main/osx-64::zlib-1.2.11-h1de35cc_3
+
+
+Preparing transaction: ...working... done
+Executing transaction: ...working... 
+done
+installation finished.
+Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: /Users/glaedr/Library/r-miniconda
+
+  added / updated specs:
+    - conda
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    ca-certificates-2021.9.30  |       hecd8cb5_1         116 KB
+    certifi-2021.10.8          |   py39hecd8cb5_0         151 KB
+    charset-normalizer-2.0.4   |     pyhd3eb1b0_0          35 KB
+    cryptography-3.4.8         |   py39h2fd3fbb_0         725 KB
+    idna-3.2                   |     pyhd3eb1b0_0          48 KB
+    libcxx-12.0.0              |       h2f01273_0         805 KB
+    openssl-1.1.1l             |       h9ed2024_0         2.2 MB
+    requests-2.26.0            |     pyhd3eb1b0_0          59 KB
+    setuptools-58.0.4          |   py39hecd8cb5_0         792 KB
+    tk-8.6.11                  |       h7bc2e8c_0         3.0 MB
+    tqdm-4.62.2                |     pyhd3eb1b0_1          96 KB
+    tzdata-2021a               |       h5d7bf9c_0         111 KB
+    urllib3-1.26.7             |     pyhd3eb1b0_0         111 KB
+    ------------------------------------------------------------
+                                           Total:         8.2 MB
+
+The following NEW packages will be INSTALLED:
+
+  charset-normalizer pkgs/main/noarch::charset-normalizer-2.0.4-pyhd3eb1b0_0
+
+The following packages will be REMOVED:
+
+  chardet-4.0.0-py39hecd8cb5_1003
+  pip-21.1.3-py39hecd8cb5_0
+  wheel-0.36.2-pyhd3eb1b0_0
+
+The following packages will be UPDATED:
+
+  ca-certificates                       2021.7.5-hecd8cb5_1 --> 2021.9.30-hecd8cb5_1
+  certifi                          2021.5.30-py39hecd8cb5_0 --> 2021.10.8-py39hecd8cb5_0
+  cryptography                         3.4.7-py39h2fd3fbb_0 --> 3.4.8-py39h2fd3fbb_0
+  idna                                    2.10-pyhd3eb1b0_0 --> 3.2-pyhd3eb1b0_0
+  libcxx                                           10.0.0-1 --> 12.0.0-h2f01273_0
+  openssl                                 1.1.1k-h9ed2024_0 --> 1.1.1l-h9ed2024_0
+  requests                              2.25.1-pyhd3eb1b0_0 --> 2.26.0-pyhd3eb1b0_0
+  setuptools                          52.0.0-py39hecd8cb5_0 --> 58.0.4-py39hecd8cb5_0
+  tk                                      8.6.10-hb0a8c7a_0 --> 8.6.11-h7bc2e8c_0
+  tqdm                                  4.61.2-pyhd3eb1b0_1 --> 4.62.2-pyhd3eb1b0_1
+  urllib3                               1.26.6-pyhd3eb1b0_1 --> 1.26.7-pyhd3eb1b0_0
+
+The following packages will be DOWNGRADED:
+
+  tzdata                                   2021a-h52ac0ba_0 --> 2021a-h5d7bf9c_0
+
+
+
+Downloading and Extracting Packages
+libcxx-12.0.0        | 805 KB    |            |   0% libcxx-12.0.0        | 805 KB    | #########5 |  95% libcxx-12.0.0        | 805 KB    | ########## | 100% 
+requests-2.26.0      | 59 KB     |            |   0% requests-2.26.0      | 59 KB     | ########## | 100% 
+cryptography-3.4.8   | 725 KB    |            |   0% cryptography-3.4.8   | 725 KB    | ########## | 100% cryptography-3.4.8   | 725 KB    | ########## | 100% 
+setuptools-58.0.4    | 792 KB    |            |   0% setuptools-58.0.4    | 792 KB    | ########## | 100% setuptools-58.0.4    | 792 KB    | ########## | 100% 
+openssl-1.1.1l       | 2.2 MB    |            |   0% openssl-1.1.1l       | 2.2 MB    | #########6 |  96% openssl-1.1.1l       | 2.2 MB    | ########## | 100% 
+certifi-2021.10.8    | 151 KB    |            |   0% certifi-2021.10.8    | 151 KB    | ########## | 100% 
+charset-normalizer-2 | 35 KB     |            |   0% charset-normalizer-2 | 35 KB     | ########## | 100% 
+urllib3-1.26.7       | 111 KB    |            |   0% urllib3-1.26.7       | 111 KB    | ########## | 100% 
+tzdata-2021a         | 111 KB    |            |   0% tzdata-2021a         | 111 KB    | ########## | 100% tzdata-2021a         | 111 KB    | ########## | 100% 
+tqdm-4.62.2          | 96 KB     |            |   0% tqdm-4.62.2          | 96 KB     | ########## | 100% 
+ca-certificates-2021 | 116 KB    |            |   0% ca-certificates-2021 | 116 KB    | ########## | 100% 
+idna-3.2             | 48 KB     |            |   0% idna-3.2             | 48 KB     | ########## | 100% 
+tk-8.6.11            | 3.0 MB    |            |   0% tk-8.6.11            | 3.0 MB    | ########5  |  86% tk-8.6.11            | 3.0 MB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: /Users/glaedr/Library/r-miniconda/envs/r-reticulate
+
+  added / updated specs:
+    - numpy
+    - python=3.6
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    ca-certificates-2021.10.8  |       h033912b_0         139 KB  conda-forge
+    certifi-2016.9.26          |           py36_0         217 KB  conda-forge
+    libblas-3.9.0              |12_osx64_openblas          12 KB  conda-forge
+    libcblas-3.9.0             |12_osx64_openblas          12 KB  conda-forge
+    libcxx-12.0.1              |       habf9029_0         1.1 MB  conda-forge
+    libffi-3.4.2               |       he49afe7_4          50 KB  conda-forge
+    libgfortran-5.0.0          |9_3_0_h6c81a4c_23          19 KB  conda-forge
+    libgfortran5-9.3.0         |      h6c81a4c_23         1.7 MB  conda-forge
+    liblapack-3.9.0            |12_osx64_openblas          12 KB  conda-forge
+    libopenblas-0.3.18         |openmp_h3351f45_0         9.0 MB  conda-forge
+    libzlib-1.2.11             |    h9173be1_1013          58 KB  conda-forge
+    llvm-openmp-12.0.1         |       hda6cdc1_1         287 KB  conda-forge
+    ncurses-6.2                |       h2e338ed_4         881 KB  conda-forge
+    numpy-1.19.5               |   py36h08b5fde_2         5.0 MB  conda-forge
+    openssl-1.1.1l             |       h0d85af4_0         1.9 MB  conda-forge
+    pip-21.3.1                 |     pyhd8ed1ab_0         1.2 MB  conda-forge
+    python-3.6.13              |haf480d7_2_cpython        20.5 MB  conda-forge
+    python_abi-3.6             |          2_cp36m           4 KB  conda-forge
+    readline-8.1               |       h05e3726_0         266 KB  conda-forge
+    setuptools-49.6.0          |   py36h79c6626_3         916 KB  conda-forge
+    sqlite-3.36.0              |       h23a322b_2         1.8 MB  conda-forge
+    tk-8.6.11                  |       h5dbffcc_1         3.3 MB  conda-forge
+    wheel-0.37.0               |     pyhd8ed1ab_1          31 KB  conda-forge
+    xz-5.2.5                   |       haf1e3a3_1         228 KB  conda-forge
+    zlib-1.2.11                |    h9173be1_1013          87 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:        48.6 MB
+
+The following NEW packages will be INSTALLED:
+
+  ca-certificates    conda-forge/osx-64::ca-certificates-2021.10.8-h033912b_0
+  certifi            conda-forge/osx-64::certifi-2016.9.26-py36_0
+  libblas            conda-forge/osx-64::libblas-3.9.0-12_osx64_openblas
+  libcblas           conda-forge/osx-64::libcblas-3.9.0-12_osx64_openblas
+  libcxx             conda-forge/osx-64::libcxx-12.0.1-habf9029_0
+  libffi             conda-forge/osx-64::libffi-3.4.2-he49afe7_4
+  libgfortran        conda-forge/osx-64::libgfortran-5.0.0-9_3_0_h6c81a4c_23
+  libgfortran5       conda-forge/osx-64::libgfortran5-9.3.0-h6c81a4c_23
+  liblapack          conda-forge/osx-64::liblapack-3.9.0-12_osx64_openblas
+  libopenblas        conda-forge/osx-64::libopenblas-0.3.18-openmp_h3351f45_0
+  libzlib            conda-forge/osx-64::libzlib-1.2.11-h9173be1_1013
+  llvm-openmp        conda-forge/osx-64::llvm-openmp-12.0.1-hda6cdc1_1
+  ncurses            conda-forge/osx-64::ncurses-6.2-h2e338ed_4
+  numpy              conda-forge/osx-64::numpy-1.19.5-py36h08b5fde_2
+  openssl            conda-forge/osx-64::openssl-1.1.1l-h0d85af4_0
+  pip                conda-forge/noarch::pip-21.3.1-pyhd8ed1ab_0
+  python             conda-forge/osx-64::python-3.6.13-haf480d7_2_cpython
+  python_abi         conda-forge/osx-64::python_abi-3.6-2_cp36m
+  readline           conda-forge/osx-64::readline-8.1-h05e3726_0
+  setuptools         conda-forge/osx-64::setuptools-49.6.0-py36h79c6626_3
+  sqlite             conda-forge/osx-64::sqlite-3.36.0-h23a322b_2
+  tk                 conda-forge/osx-64::tk-8.6.11-h5dbffcc_1
+  wheel              conda-forge/noarch::wheel-0.37.0-pyhd8ed1ab_1
+  xz                 conda-forge/osx-64::xz-5.2.5-haf1e3a3_1
+  zlib               conda-forge/osx-64::zlib-1.2.11-h9173be1_1013
+
+
+
+Downloading and Extracting Packages
+libffi-3.4.2         | 50 KB     |            |   0% libffi-3.4.2         | 50 KB     | #########6 |  96% libffi-3.4.2         | 50 KB     | ########## | 100% 
+libcxx-12.0.1        | 1.1 MB    |            |   0% libcxx-12.0.1        | 1.1 MB    | 7          |   7% libcxx-12.0.1        | 1.1 MB    | ########## | 100% libcxx-12.0.1        | 1.1 MB    | ########## | 100% 
+llvm-openmp-12.0.1   | 287 KB    |            |   0% llvm-openmp-12.0.1   | 287 KB    | ########## | 100% 
+openssl-1.1.1l       | 1.9 MB    |            |   0% openssl-1.1.1l       | 1.9 MB    | #######7   |  78% openssl-1.1.1l       | 1.9 MB    | ########## | 100% 
+ca-certificates-2021 | 139 KB    |            |   0% ca-certificates-2021 | 139 KB    | ########## | 100% 
+libcblas-3.9.0       | 12 KB     |            |   0% libcblas-3.9.0       | 12 KB     | ########## | 100% 
+sqlite-3.36.0        | 1.8 MB    |            |   0% sqlite-3.36.0        | 1.8 MB    | #########8 |  98% sqlite-3.36.0        | 1.8 MB    | ########## | 100% 
+libblas-3.9.0        | 12 KB     |            |   0% libblas-3.9.0        | 12 KB     | ########## | 100% 
+xz-5.2.5             | 228 KB    |            |   0% xz-5.2.5             | 228 KB    | ########## | 100% 
+setuptools-49.6.0    | 916 KB    |            |   0% setuptools-49.6.0    | 916 KB    | ########## | 100% setuptools-49.6.0    | 916 KB    | ########## | 100% 
+libgfortran5-9.3.0   | 1.7 MB    |            |   0% libgfortran5-9.3.0   | 1.7 MB    | #######6   |  77% libgfortran5-9.3.0   | 1.7 MB    | ########## | 100% 
+libzlib-1.2.11       | 58 KB     |            |   0% libzlib-1.2.11       | 58 KB     | ########## | 100% 
+readline-8.1         | 266 KB    |            |   0% readline-8.1         | 266 KB    | ########## | 100% 
+libopenblas-0.3.18   | 9.0 MB    |            |   0% libopenblas-0.3.18   | 9.0 MB    | #7         |  18% libopenblas-0.3.18   | 9.0 MB    | ####4      |  44% libopenblas-0.3.18   | 9.0 MB    | ######7    |  67% libopenblas-0.3.18   | 9.0 MB    | ########9  |  89% libopenblas-0.3.18   | 9.0 MB    | ########## | 100% 
+certifi-2016.9.26    | 217 KB    |            |   0% certifi-2016.9.26    | 217 KB    | ########## | 100% 
+ncurses-6.2          | 881 KB    |            |   0% ncurses-6.2          | 881 KB    | ########## | 100% ncurses-6.2          | 881 KB    | ########## | 100% 
+pip-21.3.1           | 1.2 MB    |            |   0% pip-21.3.1           | 1.2 MB    | ########## | 100% pip-21.3.1           | 1.2 MB    | ########## | 100% 
+numpy-1.19.5         | 5.0 MB    |            |   0% numpy-1.19.5         | 5.0 MB    | ###5       |  36% numpy-1.19.5         | 5.0 MB    | #########7 |  97% numpy-1.19.5         | 5.0 MB    | ########## | 100% 
+tk-8.6.11            | 3.3 MB    |            |   0% tk-8.6.11            | 3.3 MB    | ####5      |  45% tk-8.6.11            | 3.3 MB    | ########## | 100% tk-8.6.11            | 3.3 MB    | ########## | 100% 
+liblapack-3.9.0      | 12 KB     |            |   0% liblapack-3.9.0      | 12 KB     | ########## | 100% 
+zlib-1.2.11          | 87 KB     |            |   0% zlib-1.2.11          | 87 KB     | ########## | 100% 
+python_abi-3.6       | 4 KB      |            |   0% python_abi-3.6       | 4 KB      | ########## | 100% 
+python-3.6.13        | 20.5 MB   |            |   0% python-3.6.13        | 20.5 MB   | #          |  10% python-3.6.13        | 20.5 MB   | ##6        |  26% python-3.6.13        | 20.5 MB   | ####1      |  41% python-3.6.13        | 20.5 MB   | #####7     |  58% python-3.6.13        | 20.5 MB   | #######4   |  74% python-3.6.13        | 20.5 MB   | #########  |  91% python-3.6.13        | 20.5 MB   | ########## | 100% 
+libgfortran-5.0.0    | 19 KB     |            |   0% libgfortran-5.0.0    | 19 KB     | ########## | 100% 
+wheel-0.37.0         | 31 KB     |            |   0% wheel-0.37.0         | 31 KB     | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+#
+# To activate this environment, use
+#
+#     $ conda activate r-reticulate
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+* Miniconda has been successfully installed at '/Users/glaedr/Library/r-miniconda'.
+[1] "/Users/glaedr/Library/r-miniconda"
+> use_condaenv('r-reticulate', required = TRUE)
+> 
+> py_install(c('torch', 'sklearn'), pip = TRUE)
+Collecting torch
+  Using cached torch-1.10.0-cp36-none-macosx_10_9_x86_64.whl (147.1 MB)
+Collecting sklearn
+  Using cached sklearn-0.0-py2.py3-none-any.whl
+Collecting typing-extensions
+  Using cached typing_extensions-3.10.0.2-py3-none-any.whl (26 kB)
+Collecting dataclasses
+  Using cached dataclasses-0.8-py3-none-any.whl (19 kB)
+Collecting scikit-learn
+  Using cached scikit_learn-0.24.2-cp36-cp36m-macosx_10_13_x86_64.whl (7.2 MB)
+Collecting joblib>=0.11
+  Using cached joblib-1.1.0-py2.py3-none-any.whl (306 kB)
+Collecting threadpoolctl>=2.0.0
+  Using cached threadpoolctl-3.0.0-py3-none-any.whl (14 kB)
+Collecting scipy>=0.19.1
+  Using cached scipy-1.5.4-cp36-cp36m-macosx_10_9_x86_64.whl (28.8 MB)
+Requirement already satisfied: numpy>=1.13.3 in /Users/glaedr/Library/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages (from scikit-learn->sklearn) (1.19.5)
+Installing collected packages: threadpoolctl, scipy, joblib, typing-extensions, scikit-learn, dataclasses, torch, sklearn
+Successfully installed dataclasses-0.8 joblib-1.1.0 scikit-learn-0.24.2 scipy-1.5.4 sklearn-0.0 threadpoolctl-3.0.0 torch-1.10.0 typing-extensions-3.10.0.2
+> conda_install('r-reticulate', packages = c("eeyore", "kanga"))
+Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: /Users/glaedr/Library/r-miniconda/envs/r-reticulate
+
+  added / updated specs:
+    - eeyore
+    - kanga
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    certifi-2020.12.5          |   py36hecd8cb5_0         141 KB
+    cffi-1.14.6                |   py36hbc36220_1         217 KB  conda-forge
+    cycler-0.10.0              |             py_2           9 KB  conda-forge
+    dataclasses-0.8            |     pyh787bdff_2          22 KB  conda-forge
+    eeyore-0.0.19              |     pyhd8ed1ab_0          29 KB  conda-forge
+    freetype-2.10.4            |       h4cff582_1         890 KB  conda-forge
+    future-0.18.2              |   py36h79c6626_3         714 KB  conda-forge
+    jbig-2.1                   |    h0d85af4_2003          42 KB  conda-forge
+    jpeg-9d                    |       hbcb3906_0         250 KB  conda-forge
+    kanga-0.0.19               |     pyhd8ed1ab_0          17 KB  conda-forge
+    kiwisolver-1.3.1           |   py36h23ab428_0          53 KB
+    lcms2-2.12                 |       h577c468_0         404 KB  conda-forge
+    lerc-3.0                   |       he49afe7_0         170 KB  conda-forge
+    libblas-3.9.0              |     12_osx64_mkl          12 KB  conda-forge
+    libcblas-3.9.0             |     12_osx64_mkl          12 KB  conda-forge
+    libdeflate-1.8             |       h0d85af4_0          67 KB  conda-forge
+    liblapack-3.9.0            |     12_osx64_mkl          12 KB  conda-forge
+    libpng-1.6.37              |       h7cec526_2         313 KB  conda-forge
+    libprotobuf-3.18.1         |       hcf210ce_0         2.2 MB  conda-forge
+    libtiff-4.3.0              |       hd146c10_2         622 KB  conda-forge
+    libwebp-base-1.2.1         |       h0d85af4_0         692 KB  conda-forge
+    lz4-c-1.9.3                |       he49afe7_1         155 KB  conda-forge
+    matplotlib-base-3.3.4      |   py36h4ea959b_0         6.8 MB  conda-forge
+    mkl-2021.4.0               |     h89fa619_689       209.0 MB  conda-forge
+    ninja-1.10.2               |       h940c156_1         107 KB  conda-forge
+    olefile-0.46               |     pyh9f0ad1d_1          32 KB  conda-forge
+    openjpeg-2.4.0             |       h6e7aa92_1         374 KB  conda-forge
+    pandas-1.1.5               |   py36h2be6da3_0        10.0 MB  conda-forge
+    patsy-0.5.2                |     pyhd8ed1ab_0         188 KB  conda-forge
+    pillow-8.3.2               |   py36h950f3bb_0         650 KB  conda-forge
+    pycparser-2.20             |     pyh9f0ad1d_2          94 KB  conda-forge
+    pyparsing-2.4.7            |     pyh9f0ad1d_0          60 KB  conda-forge
+    python-dateutil-2.8.2      |     pyhd8ed1ab_0         240 KB  conda-forge
+    pytorch-1.9.1              |cpu_py36hccde26b_3        70.5 MB  conda-forge
+    pytorch-cpu-1.9.1          |cpu_py36he781eb1_3          13 KB  conda-forge
+    pytz-2021.3                |     pyhd8ed1ab_0         242 KB  conda-forge
+    scipy-1.5.3                |   py36h4f136de_1        16.9 MB  conda-forge
+    seaborn-0.11.2             |       hd8ed1ab_0           4 KB  conda-forge
+    seaborn-base-0.11.2        |     pyhd8ed1ab_0         223 KB  conda-forge
+    six-1.16.0                 |     pyh6c4a22f_0          14 KB  conda-forge
+    sleef-3.5.1                |       h6db0672_2         1.0 MB  conda-forge
+    statsmodels-0.12.2         |   py36h9ed2024_0         8.3 MB
+    tbb-2021.3.0               |       h940c156_0         162 KB  conda-forge
+    tornado-6.1                |   py36hfa26744_1         643 KB  conda-forge
+    typing_extensions-3.10.0.2 |     pyha770c72_0          28 KB  conda-forge
+    zstd-1.5.0                 |       h582d3a0_0         583 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:       332.9 MB
+
+The following NEW packages will be INSTALLED:
+
+  cffi               conda-forge/osx-64::cffi-1.14.6-py36hbc36220_1
+  cycler             conda-forge/noarch::cycler-0.10.0-py_2
+  dataclasses        conda-forge/noarch::dataclasses-0.8-pyh787bdff_2
+  eeyore             conda-forge/noarch::eeyore-0.0.19-pyhd8ed1ab_0
+  freetype           conda-forge/osx-64::freetype-2.10.4-h4cff582_1
+  future             conda-forge/osx-64::future-0.18.2-py36h79c6626_3
+  jbig               conda-forge/osx-64::jbig-2.1-h0d85af4_2003
+  jpeg               conda-forge/osx-64::jpeg-9d-hbcb3906_0
+  kanga              conda-forge/noarch::kanga-0.0.19-pyhd8ed1ab_0
+  kiwisolver         pkgs/main/osx-64::kiwisolver-1.3.1-py36h23ab428_0
+  lcms2              conda-forge/osx-64::lcms2-2.12-h577c468_0
+  lerc               conda-forge/osx-64::lerc-3.0-he49afe7_0
+  libdeflate         conda-forge/osx-64::libdeflate-1.8-h0d85af4_0
+  libpng             conda-forge/osx-64::libpng-1.6.37-h7cec526_2
+  libprotobuf        conda-forge/osx-64::libprotobuf-3.18.1-hcf210ce_0
+  libtiff            conda-forge/osx-64::libtiff-4.3.0-hd146c10_2
+  libwebp-base       conda-forge/osx-64::libwebp-base-1.2.1-h0d85af4_0
+  lz4-c              conda-forge/osx-64::lz4-c-1.9.3-he49afe7_1
+  matplotlib-base    conda-forge/osx-64::matplotlib-base-3.3.4-py36h4ea959b_0
+  mkl                conda-forge/osx-64::mkl-2021.4.0-h89fa619_689
+  ninja              conda-forge/osx-64::ninja-1.10.2-h940c156_1
+  olefile            conda-forge/noarch::olefile-0.46-pyh9f0ad1d_1
+  openjpeg           conda-forge/osx-64::openjpeg-2.4.0-h6e7aa92_1
+  pandas             conda-forge/osx-64::pandas-1.1.5-py36h2be6da3_0
+  patsy              conda-forge/noarch::patsy-0.5.2-pyhd8ed1ab_0
+  pillow             conda-forge/osx-64::pillow-8.3.2-py36h950f3bb_0
+  pycparser          conda-forge/noarch::pycparser-2.20-pyh9f0ad1d_2
+  pyparsing          conda-forge/noarch::pyparsing-2.4.7-pyh9f0ad1d_0
+  python-dateutil    conda-forge/noarch::python-dateutil-2.8.2-pyhd8ed1ab_0
+  pytorch            conda-forge/osx-64::pytorch-1.9.1-cpu_py36hccde26b_3
+  pytorch-cpu        conda-forge/osx-64::pytorch-cpu-1.9.1-cpu_py36he781eb1_3
+  pytz               conda-forge/noarch::pytz-2021.3-pyhd8ed1ab_0
+  scipy              conda-forge/osx-64::scipy-1.5.3-py36h4f136de_1
+  seaborn            conda-forge/noarch::seaborn-0.11.2-hd8ed1ab_0
+  seaborn-base       conda-forge/noarch::seaborn-base-0.11.2-pyhd8ed1ab_0
+  six                conda-forge/noarch::six-1.16.0-pyh6c4a22f_0
+  sleef              conda-forge/osx-64::sleef-3.5.1-h6db0672_2
+  statsmodels        pkgs/main/osx-64::statsmodels-0.12.2-py36h9ed2024_0
+  tbb                conda-forge/osx-64::tbb-2021.3.0-h940c156_0
+  tornado            conda-forge/osx-64::tornado-6.1-py36hfa26744_1
+  typing_extensions  conda-forge/noarch::typing_extensions-3.10.0.2-pyha770c72_0
+  zstd               conda-forge/osx-64::zstd-1.5.0-h582d3a0_0
+
+The following packages will be UPDATED:
+
+  certifi             conda-forge::certifi-2016.9.26-py36_0 --> pkgs/main::certifi-2020.12.5-py36hecd8cb5_0
+
+The following packages will be DOWNGRADED:
+
+  libblas                           3.9.0-12_osx64_openblas --> 3.9.0-12_osx64_mkl
+  libcblas                          3.9.0-12_osx64_openblas --> 3.9.0-12_osx64_mkl
+  liblapack                         3.9.0-12_osx64_openblas --> 3.9.0-12_osx64_mkl
+
+
+
+Downloading and Extracting Packages
+libwebp-base-1.2.1   | 692 KB    |            |   0% libwebp-base-1.2.1   | 692 KB    | ########   |  81% libwebp-base-1.2.1   | 692 KB    | ########## | 100% 
+tornado-6.1          | 643 KB    |            |   0% tornado-6.1          | 643 KB    | ########## | 100% tornado-6.1          | 643 KB    | ########## | 100% 
+tbb-2021.3.0         | 162 KB    |            |   0% tbb-2021.3.0         | 162 KB    | ########## | 100% 
+libprotobuf-3.18.1   | 2.2 MB    |            |   0% libprotobuf-3.18.1   | 2.2 MB    | #########5 |  96% libprotobuf-3.18.1   | 2.2 MB    | ########## | 100% 
+python-dateutil-2.8. | 240 KB    |            |   0% python-dateutil-2.8. | 240 KB    | ########## | 100% 
+pytorch-cpu-1.9.1    | 13 KB     |            |   0% pytorch-cpu-1.9.1    | 13 KB     | ########## | 100% 
+libtiff-4.3.0        | 622 KB    |            |   0% libtiff-4.3.0        | 622 KB    | ########## | 100% libtiff-4.3.0        | 622 KB    | ########## | 100% 
+openjpeg-2.4.0       | 374 KB    |            |   0% openjpeg-2.4.0       | 374 KB    | ########## | 100% 
+pytz-2021.3          | 242 KB    |            |   0% pytz-2021.3          | 242 KB    | ########## | 100% pytz-2021.3          | 242 KB    | ########## | 100% 
+patsy-0.5.2          | 188 KB    |            |   0% patsy-0.5.2          | 188 KB    | ########## | 100% 
+pycparser-2.20       | 94 KB     |            |   0% pycparser-2.20       | 94 KB     | ########## | 100% 
+pillow-8.3.2         | 650 KB    |            |   0% pillow-8.3.2         | 650 KB    | ########## | 100% pillow-8.3.2         | 650 KB    | ########## | 100% 
+pandas-1.1.5         | 10.0 MB   |            |   0% pandas-1.1.5         | 10.0 MB   | #6         |  17% pandas-1.1.5         | 10.0 MB   | ####8      |  49% pandas-1.1.5         | 10.0 MB   | ########1  |  82% pandas-1.1.5         | 10.0 MB   | ########## | 100% 
+certifi-2020.12.5    | 141 KB    |            |   0% certifi-2020.12.5    | 141 KB    | ########## | 100% 
+pyparsing-2.4.7      | 60 KB     |            |   0% pyparsing-2.4.7      | 60 KB     | ########## | 100% 
+mkl-2021.4.0         | 209.0 MB  |            |   0% mkl-2021.4.0         | 209.0 MB  | 1          |   1% mkl-2021.4.0         | 209.0 MB  | 2          |   3% mkl-2021.4.0         | 209.0 MB  | 4          |   4% mkl-2021.4.0         | 209.0 MB  | 5          |   6% mkl-2021.4.0         | 209.0 MB  | 7          |   7% mkl-2021.4.0         | 209.0 MB  | 8          |   9% mkl-2021.4.0         | 209.0 MB  | #          |  11% mkl-2021.4.0         | 209.0 MB  | #2         |  12% mkl-2021.4.0         | 209.0 MB  | #3         |  14% mkl-2021.4.0         | 209.0 MB  | #5         |  15% mkl-2021.4.0         | 209.0 MB  | #6         |  17% mkl-2021.4.0         | 209.0 MB  | #8         |  18% mkl-2021.4.0         | 209.0 MB  | #9         |  20% mkl-2021.4.0         | 209.0 MB  | ##1        |  21% mkl-2021.4.0         | 209.0 MB  | ##3        |  23% mkl-2021.4.0         | 209.0 MB  | ##4        |  25% mkl-2021.4.0         | 209.0 MB  | ##6        |  26% mkl-2021.4.0         | 209.0 MB  | ##7        |  28% mkl-2021.4.0         | 209.0 MB  | ##9        |  30% mkl-2021.4.0         | 209.0 MB  | ###1       |  31% mkl-2021.4.0         | 209.0 MB  | ###2       |  33% mkl-2021.4.0         | 209.0 MB  | ###4       |  34% mkl-2021.4.0         | 209.0 MB  | ###6       |  36% mkl-2021.4.0         | 209.0 MB  | ###7       |  38% mkl-2021.4.0         | 209.0 MB  | ###9       |  39% mkl-2021.4.0         | 209.0 MB  | ####       |  41% mkl-2021.4.0         | 209.0 MB  | ####2      |  42% mkl-2021.4.0         | 209.0 MB  | ####4      |  44% mkl-2021.4.0         | 209.0 MB  | ####5      |  46% mkl-2021.4.0         | 209.0 MB  | ####7      |  47% mkl-2021.4.0         | 209.0 MB  | ####9      |  49% mkl-2021.4.0         | 209.0 MB  | #####      |  51% mkl-2021.4.0         | 209.0 MB  | #####2     |  52% mkl-2021.4.0         | 209.0 MB  | #####3     |  54% mkl-2021.4.0         | 209.0 MB  | #####5     |  56% mkl-2021.4.0         | 209.0 MB  | #####7     |  57% mkl-2021.4.0         | 209.0 MB  | #####8     |  59% mkl-2021.4.0         | 209.0 MB  | ######     |  60% mkl-2021.4.0         | 209.0 MB  | ######1    |  62% mkl-2021.4.0         | 209.0 MB  | ######3    |  64% mkl-2021.4.0         | 209.0 MB  | ######5    |  65% mkl-2021.4.0         | 209.0 MB  | ######6    |  67% mkl-2021.4.0         | 209.0 MB  | ######8    |  68% mkl-2021.4.0         | 209.0 MB  | #######    |  70% mkl-2021.4.0         | 209.0 MB  | #######1   |  72% mkl-2021.4.0         | 209.0 MB  | #######3   |  73% mkl-2021.4.0         | 209.0 MB  | #######4   |  75% mkl-2021.4.0         | 209.0 MB  | #######6   |  76% mkl-2021.4.0         | 209.0 MB  | #######8   |  78% mkl-2021.4.0         | 209.0 MB  | #######9   |  80% mkl-2021.4.0         | 209.0 MB  | ########1  |  81% mkl-2021.4.0         | 209.0 MB  | ########3  |  83% mkl-2021.4.0         | 209.0 MB  | ########4  |  85% mkl-2021.4.0         | 209.0 MB  | ########6  |  86% mkl-2021.4.0         | 209.0 MB  | ########7  |  88% mkl-2021.4.0         | 209.0 MB  | ########9  |  89% mkl-2021.4.0         | 209.0 MB  | #########  |  91% mkl-2021.4.0         | 209.0 MB  | #########2 |  93% mkl-2021.4.0         | 209.0 MB  | #########4 |  94% mkl-2021.4.0         | 209.0 MB  | #########5 |  96% mkl-2021.4.0         | 209.0 MB  | #########7 |  97% mkl-2021.4.0         | 209.0 MB  | #########9 |  99% mkl-2021.4.0         | 209.0 MB  | ########## | 100% 
+eeyore-0.0.19        | 29 KB     |            |   0% eeyore-0.0.19        | 29 KB     | ########## | 100% 
+libdeflate-1.8       | 67 KB     |            |   0% libdeflate-1.8       | 67 KB     | ########## | 100% 
+liblapack-3.9.0      | 12 KB     |            |   0% liblapack-3.9.0      | 12 KB     | ########## | 100% 
+libblas-3.9.0        | 12 KB     |            |   0% libblas-3.9.0        | 12 KB     | ########## | 100% 
+pytorch-1.9.1        | 70.5 MB   |            |   0% pytorch-1.9.1        | 70.5 MB   | 3          |   3% pytorch-1.9.1        | 70.5 MB   | 8          |   8% pytorch-1.9.1        | 70.5 MB   | #2         |  13% pytorch-1.9.1        | 70.5 MB   | #7         |  18% pytorch-1.9.1        | 70.5 MB   | ##2        |  23% pytorch-1.9.1        | 70.5 MB   | ##7        |  27% pytorch-1.9.1        | 70.5 MB   | ###2       |  32% pytorch-1.9.1        | 70.5 MB   | ###6       |  37% pytorch-1.9.1        | 70.5 MB   | ####1      |  42% pytorch-1.9.1        | 70.5 MB   | ####6      |  46% pytorch-1.9.1        | 70.5 MB   | #####1     |  51% pytorch-1.9.1        | 70.5 MB   | #####6     |  56% pytorch-1.9.1        | 70.5 MB   | ######1    |  61% pytorch-1.9.1        | 70.5 MB   | ######6    |  66% pytorch-1.9.1        | 70.5 MB   | #######    |  71% pytorch-1.9.1        | 70.5 MB   | #######5   |  76% pytorch-1.9.1        | 70.5 MB   | ########   |  80% pytorch-1.9.1        | 70.5 MB   | ########4  |  85% pytorch-1.9.1        | 70.5 MB   | ########9  |  90% pytorch-1.9.1        | 70.5 MB   | #########4 |  95% pytorch-1.9.1        | 70.5 MB   | #########9 |  99% pytorch-1.9.1        | 70.5 MB   | ########## | 100% 
+zstd-1.5.0           | 583 KB    |            |   0% zstd-1.5.0           | 583 KB    | ########## | 100% zstd-1.5.0           | 583 KB    | ########## | 100% 
+lcms2-2.12           | 404 KB    |            |   0% lcms2-2.12           | 404 KB    | ########## | 100% lcms2-2.12           | 404 KB    | ########## | 100% 
+seaborn-0.11.2       | 4 KB      |            |   0% seaborn-0.11.2       | 4 KB      | ########## | 100% 
+jpeg-9d              | 250 KB    |            |   0% jpeg-9d              | 250 KB    | ########## | 100% 
+lz4-c-1.9.3          | 155 KB    |            |   0% lz4-c-1.9.3          | 155 KB    | ########## | 100% 
+olefile-0.46         | 32 KB     |            |   0% olefile-0.46         | 32 KB     | ########## | 100% 
+six-1.16.0           | 14 KB     |            |   0% six-1.16.0           | 14 KB     | ########## | 100% 
+dataclasses-0.8      | 22 KB     |            |   0% dataclasses-0.8      | 22 KB     | ########## | 100% 
+seaborn-base-0.11.2  | 223 KB    |            |   0% seaborn-base-0.11.2  | 223 KB    | ########## | 100% 
+jbig-2.1             | 42 KB     |            |   0% jbig-2.1             | 42 KB     | ########## | 100% 
+scipy-1.5.3          | 16.9 MB   |            |   0% scipy-1.5.3          | 16.9 MB   | 6          |   7% scipy-1.5.3          | 16.9 MB   | ##5        |  26% scipy-1.5.3          | 16.9 MB   | ####6      |  46% scipy-1.5.3          | 16.9 MB   | ######6    |  66% scipy-1.5.3          | 16.9 MB   | ########6  |  86% scipy-1.5.3          | 16.9 MB   | ########## | 100% 
+matplotlib-base-3.3. | 6.8 MB    |            |   0% matplotlib-base-3.3. | 6.8 MB    | ##9        |  30% matplotlib-base-3.3. | 6.8 MB    | #######8   |  79% matplotlib-base-3.3. | 6.8 MB    | ########## | 100% 
+kiwisolver-1.3.1     | 53 KB     |            |   0% kiwisolver-1.3.1     | 53 KB     | ########## | 100% 
+libpng-1.6.37        | 313 KB    |            |   0% libpng-1.6.37        | 313 KB    | ########## | 100% 
+freetype-2.10.4      | 890 KB    |            |   0% freetype-2.10.4      | 890 KB    | ########## | 100% freetype-2.10.4      | 890 KB    | ########## | 100% 
+kanga-0.0.19         | 17 KB     |            |   0% kanga-0.0.19         | 17 KB     | ########## | 100% 
+cffi-1.14.6          | 217 KB    |            |   0% cffi-1.14.6          | 217 KB    | ########## | 100% 
+libcblas-3.9.0       | 12 KB     |            |   0% libcblas-3.9.0       | 12 KB     | ########## | 100% 
+lerc-3.0             | 170 KB    |            |   0% lerc-3.0             | 170 KB    | ########## | 100% 
+cycler-0.10.0        | 9 KB      |            |   0% cycler-0.10.0        | 9 KB      | ########## | 100% 
+sleef-3.5.1          | 1.0 MB    |            |   0% sleef-3.5.1          | 1.0 MB    | ########## | 100% sleef-3.5.1          | 1.0 MB    | ########## | 100% 
+future-0.18.2        | 714 KB    |            |   0% future-0.18.2        | 714 KB    | ########## | 100% future-0.18.2        | 714 KB    | ########## | 100% 
+statsmodels-0.12.2   | 8.3 MB    |            |   0% statsmodels-0.12.2   | 8.3 MB    | #9         |  19% statsmodels-0.12.2   | 8.3 MB    | ####8      |  48% statsmodels-0.12.2   | 8.3 MB    | ########3  |  84% statsmodels-0.12.2   | 8.3 MB    | ########## | 100% 
+typing_extensions-3. | 28 KB     |            |   0% typing_extensions-3. | 28 KB     | ########## | 100% 
+ninja-1.10.2         | 107 KB    |            |   0% ninja-1.10.2         | 107 KB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+> 
+> source_python('reticulate.py')
+INTEL MKL ERROR: dlopen(/Users/glaedr/Library/r-miniconda/envs/r-reticulate/lib/libmkl_intel_thread.1.dylib, 9): Library not loaded: @rpath/libiomp5.dylib
+  Referenced from: /Users/glaedr/Library/r-miniconda/envs/r-reticulate/lib/libmkl_intel_thread.1.dylib
+  Reason: image not found.
+Intel MKL FATAL ERROR: Cannot load libmkl_intel_thread.1.dylib.

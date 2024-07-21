@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/glaedr/Desktop/GitHub/RBM/examples/penguins/save_chains.py", line 19, in <module>
+    save_chains(i,n,p,rep)
+  File "/Users/glaedr/Desktop/GitHub/RBM/examples/penguins/save_chains.py", line 10, in save_chains
+    with open(filename,"w+") as my_csv:
+FileNotFoundError: [Errno 2] No such file or directory: 'Mchains/m_5_n_20000_/chain_m__0_0.csv'
+/Library/Frameworks/R.framework/Resources/bin/BATCH: line 60: 55203 Killed: 9               ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
